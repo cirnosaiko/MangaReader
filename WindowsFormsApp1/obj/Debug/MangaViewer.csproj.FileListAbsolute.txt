@@ -1,0 +1,10 @@
+D:\test\mangaviewer2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\test\mangaviewer2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\test\mangaviewer2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\MangaViewer.csprojAssemblyReference.cache
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\MangaViewer.csproj.GenerateResource.cache
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\MangaViewer.csproj.CoreCompileInputs.cache
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\test\mangaviewer2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
