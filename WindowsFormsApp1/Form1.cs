@@ -77,7 +77,7 @@ namespace WindowsFormsApp1
 
         private void SetFormTitle(string title)//设置窗口标题
         {
-            this.Text = "MangaViewer玖特供版 " + FinialFolder(title);
+            this.Text = "MangaReader " + FinialFolder(title);
         }
 
         private void ClearAllPics()//清空释放所有panel1图片
@@ -148,7 +148,8 @@ namespace WindowsFormsApp1
             
             PicturesPath = LoadPicturesPath(s, out NumOfPics);//所有图片路径
 
-            pictureBox1.Image = Image.FromFile(CoverPath(PicturesPath, NumOfPics));//封面图片                
+            if(PicturesPath.Length != 0)
+                pictureBox1.Image = Image.FromFile(CoverPath(PicturesPath, NumOfPics));//封面图片                
 
             ClearAllPics();
 
@@ -274,6 +275,7 @@ namespace WindowsFormsApp1
         {
             ChangePictureBoxSize();
             splitContainer1.SplitterDistance = 111;
+            label2.Location = new Point(this.Width-157, label2.Location.Y);
         }
 
         private void ChangePictureBoxSize()
@@ -437,16 +439,46 @@ namespace WindowsFormsApp1
             //textBox1.Text = System.DateTime.Now.ToLongTimeString();
 
             int t = (-panel1.AutoScrollPosition.Y) / ((panel1.VerticalScroll.Maximum) / NumOfPics) + 2;
-            if ((t - 1 == NowCenterPic) && t <= NumOfPics - 2 && t >= 3)//向下翻
+            //textBox1.Text = "t="+ t.ToString() + ",nowcenterpic=" + NowCenterPic.ToString();
+
+            if (t != NowCenterPic)
             {
+                for(int i=-2;i<=2;i++)//释放
+                {
+                    if(!withinRange(t-2,t+2, NowCenterPic + i))//要释放的不在范围内                        
+                    {
+                        foreach (PictureBox x in panel1.Controls)
+                        {
+                            if (x.Name.StartsWith("pic" + Add0(NowCenterPic + i)))
+                            {
+                                DisposePicutrebox(x);
+                                break;
+                            }
+                        }
+                    }   
+                }
+                for (int i = -2; i <= 2; i++)//加载
+                {
+                    if (!withinRange(NowCenterPic - 2, NowCenterPic + 2, t + i))//要加载的不在范围内
+                    {
+                        //加载
+                        foreach (PictureBox x in panel1.Controls)
+                        {
+                            if (x.Name.StartsWith("pic" + Add0(t + i)))
+                                x.Image = Image.FromFile(PicturesPath[t + i - 1]);    //载入图片
+                        }
+                    }
+                }
                 NowCenterPic = t;
-                LoadImages(PicturesPath, NowCenterPic - 2, NowCenterPic + 2, "next");
             }
-            if ((t + 1 == NowCenterPic) && t <= NumOfPics - 2 && t >= 3)//向上翻
-            {
-                NowCenterPic = t;
-                LoadImages(PicturesPath, NowCenterPic - 2, NowCenterPic + 2, "previous");
-            }
+        }
+
+        private bool withinRange(int rangeMin, int rangeMax, int testNUM)
+        {
+            if (testNUM <= rangeMax && testNUM >= rangeMin)
+                return true;
+            else
+                return false;
         }
     }
 }
